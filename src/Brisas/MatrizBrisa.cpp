@@ -177,5 +177,5 @@ void MatrizBrisa::drawControles(int iBrisa) {
     }
     
     fonteKinect->drawControles();
-    fonteKinect->fboBrisa.draw(504,504,308,231);
+    fonteKinect->drawMiniatura();
 }

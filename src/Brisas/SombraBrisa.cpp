@@ -96,6 +96,5 @@ void SombraBrisa::drawControles(int iBrisa) {
     ImGui::Checkbox("Limpa Frames", &clearFrames);
 
     fonteKinect->drawControles();
-
-    fonteKinect->fboBrisa.draw(504,504,308,231);
+    fonteKinect->drawMiniatura();
 }
