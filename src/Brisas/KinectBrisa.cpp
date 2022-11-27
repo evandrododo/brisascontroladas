@@ -55,10 +55,11 @@ void KinectBrisa::drawControles(int iBrisa) {
     ImGui::Checkbox("Encontrar buracos", &bFindHoles);
     ImGui::SliderInt("min Area", &minArea, 0, 100);
     ImGui::SliderInt("max Area", &maxArea, 100, (640*480) );
-    ImGui::SliderInt("blobs", &blobsConsiderados, 0, 20 );
+    ImGui::SliderInt("blobs", &blobsConsiderados, 0, 20);
 
+    // draw fboBrisa to screen
     fonteKinect->drawControles();
+    fonteKinect->drawMiniatura();
     desenharControlesShader();
 
-    fonteKinect->fboBrisa.draw(504,504,308,231);
 }

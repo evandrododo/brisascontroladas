@@ -61,8 +61,8 @@ void Brisa::desenhaJanela(int i) {
     text += std::to_string(i);
     
     ImGui::SetNextWindowSize(ofVec2f(500,548), ImGuiCond_Once);
-    ImGui::SetNextWindowPos(ofVec2f(400,0), ImGuiCond_Once);
-    string titulo = "Configurações Brisa #" + to_string(i+1);
+    ImGui::SetNextWindowPos(ofVec2f(210, 430), ImGuiCond_FirstUseEver);
+    string titulo = "Brisa #" + to_string(i+1);
     ImGuiWindowFlags window_flags = 0;
   //  window_flags |= ImGuiWindowFlags_NoResize;
     window_flags |= ImGuiWindowFlags_NoCollapse;

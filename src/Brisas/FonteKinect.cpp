@@ -9,10 +9,10 @@ FonteKinect::FonteKinect(ofxKinect *kinectGlobal, int cameraSelecionada = 0) {
     mirrorHorizontal = mirrorVertical = false;
     ofSetBackgroundAuto(false);
     iRastro = 0;
-    iBlur = 4;
-    iBlurH = 1;
-    iErode = 10;
-    iDilate = 10;
+    iBlur = 0;
+    iBlurH = 0;
+    iErode = 0;
+    iDilate = 0;
     floatColor.allocate(640,480);
     floatImage.allocate(640,480);
     grayImage.allocate(640,480);
@@ -146,6 +146,14 @@ void FonteKinect::drawControles() {
         }
 
     }
+}
+
+void FonteKinect::drawMiniatura() {
+    int xMini = 954;
+    int yMini = 10;
+    int miniaturaWidth = 308;
+    int miniaturaHeight = 231;
+    fboBrisa.draw(xMini, yMini ,miniaturaWidth,miniaturaHeight);
 }
 
 void FonteKinect::setBlur( int novoBlur ) {

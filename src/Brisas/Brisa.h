@@ -77,6 +77,7 @@ class FonteKinect : public Brisa {
     int iRastro;
 
     void drawControles();
+    void drawMiniatura();
 
     bool mirrorHorizontal, mirrorVertical;
     ofxCvGrayscaleImage grayImage;
