@@ -12,6 +12,8 @@ class CameraBrisa : public Brisa {
 
     void drawControles(int iBrisa);
 
+    ofVideoGrabber cam;
+    int indexDevice;
     bool mirrorHorizontal, mirrorVertical;
 };
 

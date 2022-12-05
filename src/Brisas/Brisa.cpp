@@ -196,6 +196,7 @@ void Brisa::listaShaders() {
 
 void Brisa::aplicarShader() {
 
+/*
     while( receiverOSC->hasWaitingMessages() )
     {
         ofxOscMessage m;
@@ -221,20 +222,6 @@ void Brisa::aplicarShader() {
                 msg_string += m.getArgAsString( i );
                 paramOSC = ofToFloat(m.getArgAsString( i ));
             }
-            /*
-            if( i == 4 ) {
-                if( paramOSC < minp1 ) minp1 = paramOSC;
-                if( paramOSC > maxp1 ) maxp1 = paramOSC;
-                p1Shader = ofLerp(p1Shader, ofNormalize( paramOSC, minp1, maxp1)*20, 0.5);
-            } else if ( i == 5 ) {
-                if( paramOSC < minp2 ) minp2 = paramOSC;
-                if( paramOSC > maxp2 ) maxp2 = paramOSC;
-                p2Shader = ofLerp(p2Shader, ofNormalize( paramOSC, minp2, maxp2)*20, 0.5);
-            } else if( i == 6 ) {
-                if( paramOSC < minp3 ) minp3 = paramOSC;
-                if( paramOSC > maxp3 ) maxp3 = paramOSC;
-                p3Shader = ofLerp(p3Shader, ofNormalize( paramOSC, minp3, maxp3)*20, 0.5);
-            }*/
             //if( m.getAddress() == "/Note1" && paramOSC == 36) {
             if( m.getAddress() == "pad" && i == 0) {
                 if( paramOSC < minp1 ) minp1 = paramOSC;
@@ -259,6 +246,8 @@ void Brisa::aplicarShader() {
         cout << "\nOSC recebido - Address:" << msg_string;
     }
 
+*/
+    
     p1Shader = ofLerp(p1Shader, 0, 0.001);
     p2Shader = ofLerp(p2Shader, 0, 0.001);
     p3Shader = ofLerp(p3Shader, 0, 0.001);
