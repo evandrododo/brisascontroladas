@@ -1,16 +1,15 @@
-#include "Brisa.h"
+#include "KinectCamBrisa.h"
 
-KinectBrisa::KinectBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+KinectCamBrisa::KinectCamBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
     setup();
     // Configura a brisa e defini o ícone
     brisasAtivas = brisasParent;
     receiverOSC = receiver;
     mirrorHorizontal = mirrorVertical = false;
     clearFrames = true;
-    nivelFade = 20;
+    nivelFade = 0;
     ofSetBackgroundAuto(false);
-    ligaContornos = true;
-    fonteKinect = new FonteKinect(kinectGlobal, 2);
+    fonteKinect = new FonteKinect(kinectGlobal, 1);
     minArea = 10;
     maxArea = (640*480)/2; // (kinect_width*kinect_height)/2
     blobsConsiderados = 10;
@@ -18,7 +17,7 @@ KinectBrisa::KinectBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, 
 }
 
 
-void KinectBrisa::update( float dt ) {
+void KinectCamBrisa::update( float dt ) {
     fonteKinect->update(dt);
     fboBrisa.begin();
 
@@ -30,28 +29,20 @@ void KinectBrisa::update( float dt ) {
     }
 
     fonteKinect->fboBrisa.draw(0,0);
-    if (ligaContornos) {
-        fonteKinect->pixelsBrisa.setImageType(OF_IMAGE_GRAYSCALE);
-        grayImage.setFromPixels(fonteKinect->pixelsBrisa);
-        contourFinder.findContours(grayImage, minArea, maxArea, blobsConsiderados, bFindHoles);
-        contourFinder.draw(0,0,WIDTH,HEIGHT);
-    }
-
     fboBrisa.end();
     fboBrisa.readToPixels(pixelsBrisa);
 }
 
-void KinectBrisa::draw() {
+void KinectCamBrisa::draw() {
     aplicarShader();
 }
 
-void KinectBrisa::drawControles(int iBrisa) {
+void KinectCamBrisa::drawControles(int iBrisa) {
     ImGui::Checkbox("Liga Fade", &clearFrames);
     if(clearFrames){
         ImGui::SliderFloat("Fade", &nivelFade, 0, 100);
     }
 
-    ImGui::Checkbox("Contornos", &ligaContornos);
     ImGui::Checkbox("Encontrar buracos", &bFindHoles);
     ImGui::SliderInt("min Area", &minArea, 0, 100);
     ImGui::SliderInt("max Area", &maxArea, 100, (640*480) );
@@ -61,5 +52,4 @@ void KinectBrisa::drawControles(int iBrisa) {
     fonteKinect->drawControles();
     fonteKinect->drawMiniatura();
     desenharControlesShader();
-
 }

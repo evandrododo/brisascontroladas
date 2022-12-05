@@ -9,7 +9,6 @@ const float HEIGHT = 768;
 #include "ofxKinect.h"
 #include "ofxOsc.h"
 
-
 class Brisa {
 
     public:

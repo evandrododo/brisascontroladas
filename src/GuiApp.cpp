@@ -16,12 +16,15 @@ void GuiApp::setup(){
     btnCriaSombras = gui.loadTexture("../data/img/icon/sombras.png");
     btnCriaMandala = gui.loadTexture("../data/img/icon/mandala.png");
     btnCriaBorda = gui.loadTexture("../data/img/icon/borda.png");
+    btnCriaKinectCam = gui.loadTexture("../data/img/icon/kinectcam.png");
+    btnCriaCamera = gui.loadTexture("../data/img/icon/camera.png");
 
     ImGui::GetIO().MouseDrawCursor = false;
     desenhaMiniaturas = true;
 
     coresPaleta.push_back(ofColor::fromHex(0x00126D));
     coresPaleta.push_back(ofColor::fromHex(0xC0126D));
+    coresPaleta.push_back(ofColor::fromHex(0x000000));
 
     iBlend = 2;
     anguloKinect = 0;
@@ -115,7 +118,9 @@ void GuiApp::adicionaBrisa() {
     bool criaVideo = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaVideo, ImVec2(120, 90));
     bool criaGif = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaGif, ImVec2(120, 90)); ImGui::SameLine();
     bool criaImg = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaImg, ImVec2(120, 90)); ImGui::SameLine();
-    bool criaPoligono = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaPoligono, ImVec2(120, 90)); 
+    bool criaPoligono = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaPoligono, ImVec2(120, 90)); ImGui::SameLine();
+    bool criaCamera = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaCamera, ImVec2(120, 90)); 
+    bool criaKinectCam = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaKinectCam, ImVec2(120, 90)); 
 //    bool criaMandala = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaMandala, ImVec2(120, 90)); ImGui::SameLine();
 //    bool criaBorda = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaBorda, ImVec2(120, 90));
 
@@ -146,6 +151,14 @@ void GuiApp::adicionaBrisa() {
     if (criaSombras) {
         cout << "btn pressionado: criaSombras";
         brisasAtivas.push_back(new SombraBrisa(&kinectGlobal, &brisasAtivas, &coresPaleta, &receiverOSC));
+    }
+    if (criaKinectCam) {
+        cout << "btn pressionado: criaKinectCam";
+        brisasAtivas.push_back(new KinectCamBrisa(&kinectGlobal, &brisasAtivas, &receiverOSC));
+    }
+    if (criaCamera) {
+        cout << "btn pressionado: criaCamera";
+        brisasAtivas.push_back(new CameraBrisa(&brisasAtivas));
     }
 
 }

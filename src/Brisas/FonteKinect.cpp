@@ -1,5 +1,6 @@
 #include "Brisa.h"
 
+        ofxCvColorImage colorImage2;
 FonteKinect::FonteKinect(ofxKinect *kinectGlobal, int cameraSelecionada = 0) {
     setup();
     // Configura a brisa e defini o ícone
@@ -18,10 +19,11 @@ FonteKinect::FonteKinect(ofxKinect *kinectGlobal, int cameraSelecionada = 0) {
     grayImage.allocate(640,480);
     colorImage.allocate(640,480);
 
-    floatColor.setROI(20,100,520,480);
-    colorImage.setROI(20,100,520,480);
-    grayImage.setROI(20,100,520,480);
-    floatImage.setROI(20,100,520,480);
+    ofRectangle roi = ofRectangle(0,0,640,480);
+    floatColor.setROI(roi);
+    colorImage.setROI(roi);
+    grayImage.setROI(roi);
+    floatImage.setROI(roi);
 }
 
 void FonteKinect::ligaKinect() {
@@ -86,7 +88,7 @@ void FonteKinect::update( float dt ) {
     maxI = iErode > maxI ? iErode : maxI;
     maxI = iDilate > maxI ? iDilate : maxI;
 
-    // Aplica blur, erode e dilate
+    // // Aplica blur, erode e dilate
     for (int i = 0; i < maxI; i++) {
         if (iErode >= i )
             floatColor.erode();
@@ -107,17 +109,20 @@ void FonteKinect::update( float dt ) {
     }
     floatImage.flagImageChanged();
     floatColor = floatImage;
-
     floatColor.mirror(mirrorVertical, mirrorHorizontal);
+
     if (camera == 1) {
-        floatColor.draw(0,0,WIDTH,HEIGHT);
+        // floatColor.draw(0,0,WIDTH,HEIGHT);
+        // colorImage2 = floatColor;
+        colorImage.draw(0,0,WIDTH,HEIGHT);
     } else {
         grayImage = floatColor;
         grayImage.brightnessContrast(brilhoBrisa, contrasteBrisa);
         grayImage.drawROI(0,0,WIDTH,HEIGHT);
     }
-
+    
     fboBrisa.end();
+    fboBrisa.draw(954, 400, 308, 231);
     fboBrisa.readToPixels(pixelsBrisa);
 }
 
