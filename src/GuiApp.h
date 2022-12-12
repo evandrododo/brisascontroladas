@@ -4,10 +4,15 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
+#include "ofxOsc.h"
 #include "Brisas/Brisa.h"
 #include "camera/CameraBrisa.h"
+#include "camera/FinderBrisa.h"
+#include "camera/BodyBrisa.h"
 #include "kinect/KinectCamBrisa.h"
-#include "ofxOsc.h"
+#include "kinect/KinectContornosBrisa.h"
+#include "kinect/SombraBrisa.h"
+#include "kinect/MatrizBrisa.h"
 
 #define PORT_OSC 9001
 
@@ -33,8 +38,8 @@ public:
     ofxKinect kinectGlobal;
     int anguloKinect;
 
-    GLuint btnCriaVideo, btnCriaPoligono, btnCriaKinect, btnCriaImg,
-        btnCriaGif, btnCriaMatriz, btnCriaSombras, btnCriaMandala, btnCriaBorda, btnCriaCamera, btnCriaKinectCam;
+    GLuint btnCriaVideo, btnCriaPoligono, btnCriaKinect, btnCriaImg, btnCriaFinder,
+        btnCriaGif, btnCriaMatriz, btnCriaSombras, btnCriaMandala, btnCriaBorda, btnCriaCamera, btnCriaKinectCam, btnCriaBody;
 
     vector<ImVec4> coresPaleta;
     ofBlendMode blendMode;

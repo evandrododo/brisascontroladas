@@ -11,16 +11,16 @@ int main(){
 	int xDisplay, yDisplay, wDisplay, hDisplay;
 	
 	// Posição inicial e tamanho da tela de controle
-	xGUI = 1950;
+	xGUI = 50;
 	yGUI = 20;
 	wGUI = 1333;
 	hGUI = 950;
 
 	// Posição inicial e tamanho da tela de exibição
-	xDisplay = 3460;
-	yDisplay = 312;
-	wDisplay = 1024;
-	hDisplay = 768;
+	xDisplay = 0;
+	yDisplay = 0;
+	wDisplay = 1920;
+	hDisplay = 1080;
 
 	ofGLFWWindowSettings settings;
 

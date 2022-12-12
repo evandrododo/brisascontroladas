@@ -18,6 +18,8 @@ void GuiApp::setup(){
     btnCriaBorda = gui.loadTexture("../data/img/icon/borda.png");
     btnCriaKinectCam = gui.loadTexture("../data/img/icon/kinectcam.png");
     btnCriaCamera = gui.loadTexture("../data/img/icon/camera.png");
+    btnCriaBody = gui.loadTexture("../data/img/icon/camera.png");
+    btnCriaFinder = gui.loadTexture("../data/img/icon/camera.png");
 
     ImGui::GetIO().MouseDrawCursor = false;
     desenhaMiniaturas = true;
@@ -129,6 +131,10 @@ void GuiApp::adicionaBrisa() {
     bool criaVideo = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaVideo, ImVec2(120, 90));
 
     bool criaCamera = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaCamera, ImVec2(120, 90));
+    ImGui::SameLine();
+    bool criaFinder = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaFinder, ImVec2(120, 90));
+    ImGui::SameLine();
+    bool criaBody = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaBody, ImVec2(120, 90));
     //    bool criaMandala = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaMandala, ImVec2(120, 90)); ImGui::SameLine();
     //    bool criaBorda = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaBorda, ImVec2(120, 90));
 
@@ -142,7 +148,7 @@ void GuiApp::adicionaBrisa() {
     }
     if (criaKinect) {
         cout << "btn pressionado: criaKinect";
-        brisasAtivas.push_back(new KinectBrisa(&kinectGlobal, &brisasAtivas, &receiverOSC));
+        brisasAtivas.push_back(new KinectContornosBrisa(&kinectGlobal, &brisasAtivas, &receiverOSC));
     }
     if (criaImg) {
         cout << "btn pressionado: criaImg";
@@ -167,6 +173,14 @@ void GuiApp::adicionaBrisa() {
     if (criaCamera) {
         cout << "btn pressionado: criaCamera";
         brisasAtivas.push_back(new CameraBrisa(&brisasAtivas));
+    }
+    if (criaFinder) {
+        cout << "btn pressionado: criaBody";
+        brisasAtivas.push_back(new FinderBrisa(&brisasAtivas, &coresPaleta));
+    }
+    if (criaBody) {
+        cout << "btn pressionado: criaBody";
+        brisasAtivas.push_back(new BodyBrisa(&brisasAtivas, &coresPaleta));
     }
 
 }

@@ -1,6 +1,6 @@
-#include "Brisa.h"
+#include "KinectContornosBrisa.h"
 
-KinectBrisa::KinectBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+KinectContornosBrisa::KinectContornosBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
     setup();
     // Configura a brisa e defini o ícone
     brisasAtivas = brisasParent;
@@ -18,7 +18,7 @@ KinectBrisa::KinectBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, 
 }
 
 
-void KinectBrisa::update( float dt ) {
+void KinectContornosBrisa::update( float dt ) {
     fonteKinect->update(dt);
     fboBrisa.begin();
 
@@ -41,11 +41,11 @@ void KinectBrisa::update( float dt ) {
     fboBrisa.readToPixels(pixelsBrisa);
 }
 
-void KinectBrisa::draw() {
+void KinectContornosBrisa::draw() {
     aplicarShader();
 }
 
-void KinectBrisa::drawControles(int iBrisa) {
+void KinectContornosBrisa::drawControles(int iBrisa) {
     ImGui::Checkbox("Liga Fade", &clearFrames);
     if(clearFrames){
         ImGui::SliderFloat("Fade", &nivelFade, 0, 100);

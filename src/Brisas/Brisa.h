@@ -1,14 +1,13 @@
 #ifndef BRISA_H__
 #define BRISA_H__
 
-const float WIDTH = 1024;
-const float HEIGHT = 768;
+const float WIDTH = 1920;
+const float HEIGHT = 1080;
 
 #include "ofxImGui.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "ofxOsc.h"
-
 class Brisa {
 
     public:
@@ -84,81 +83,6 @@ class FonteKinect : public Brisa {
     ofxCvColorImage colorImage;
     ofxCvFloatImage floatImage, floatColor;
 };
-
-class KinectBrisa : public Brisa {
-
-    float nivelFade;
-    public:
-    KinectBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
-    void draw();
-    void update( float dt );
-
-    void desenhaMiniatura(int i);
-
-    void drawControles(int iBrisa);
-
-    bool mirrorHorizontal, mirrorVertical;
-    bool ligaContornos;
-    bool bFindHoles;
-    int minArea,maxArea,blobsConsiderados;
-    ofxCvContourFinder contourFinder;
-    ofxCvGrayscaleImage grayImage;
-
-    FonteKinect* fonteKinect;
-};
-
-class SombraBrisa : public Brisa {
-
-    ofxKinect *kinecto;
-    int camera;
-
-    public:
-    SombraBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver);
-    void draw();
-    void update(float dt);
-
-    void desenhaMiniatura(int i);
-    void drawControles(int iBrisa);
-    bool blurKinect, desenhaBlur, mirrorHorizontal, mirrorVertical;
-    float brightnessGray, contrastGray;
-    int iBlur;
-    bool sombraHoriz, sombraVert;
-    ImVec4 corBrisa, corComplementar;
-    ofPixels grayPixels;
-
-    ofxCvGrayscaleImage grayImage, blurGray;
-
-    FonteKinect* fonteKinect;
-};
-
-class MatrizBrisa : public Brisa {
-
-    ofxKinect *kinecto;
-    int camera;
-
-    public:
-    MatrizBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> coresPaleta, ofxOscReceiver *receiver);
-    void draw();
-    void update(float dt);
-
-    void desenhaMiniatura(int i);
-    void drawControles(int iBrisa);
-    void desenhaPonto(int brilho, int width, int height, int x, int y, int gapX, int gapY);
-    void desenhaPixels(int brilho, int width, int height, int x, int y, int gapX, int gapY);
-    void desenhaColunas(int brilho, int width, int height, int x, int y, int gapX, int gapY);
-    bool blurKinect, desenhaBlur, mirrorHorizontal, mirrorVertical;
-    float brightnessGray, contrastGray;
-    ofPixels grayPixels;
-    int intervaloX, intervaloY;
-    bool intercalaPontos;
-    int tipoMatriz;
-
-    vector<ImVec4> coresPaleta;
-
-    ofxCvGrayscaleImage grayImage, blurGray;
-    FonteKinect* fonteKinect;
-};
-
 class VideoBrisa : public Brisa {
     float heightDraw, widthDraw, heightOrig, widthOrig;
 

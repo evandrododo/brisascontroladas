@@ -9,7 +9,7 @@ CameraBrisa::CameraBrisa(vector<Brisa*> *brisasParent) {
 
     ofSetBackgroundAuto(false);
     
-    // Define -1 como não selecionado
+    // Define index como -1 (nenhum dispositivo selecionado)
     indexDevice = -1;
 }
 
@@ -31,8 +31,6 @@ void CameraBrisa::draw() {
 }
 
 void CameraBrisa::drawControles(int iBrisa) {
-    // desenharControlesShader();
-
     if (ImGui::Button("Carregar Camera")) { 
         ImGui::OpenPopup("deviceIndex");
     }

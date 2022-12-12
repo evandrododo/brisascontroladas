@@ -1,4 +1,4 @@
-#include "Brisa.h"
+#include "SombraBrisa.h"
 
 SombraBrisa::SombraBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver) {
     setup();

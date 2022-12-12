@@ -1,4 +1,4 @@
-#include "Brisa.h"
+#include "MatrizBrisa.h"
 
 MatrizBrisa::MatrizBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> paletaGeral, ofxOscReceiver *receiver) {
     setup();

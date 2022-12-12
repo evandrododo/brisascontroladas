@@ -1,9 +1,7 @@
 #include "Brisa.h"
 
-        ofxCvColorImage colorImage2;
 FonteKinect::FonteKinect(ofxKinect *kinectGlobal, int cameraSelecionada = 0) {
     setup();
-    // Configura a brisa e defini o ícone
     kinect = kinectGlobal;
     camera = cameraSelecionada; // 0 = camera RGB (default) | 1 = camera Depth
 
