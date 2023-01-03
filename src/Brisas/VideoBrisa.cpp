@@ -8,9 +8,9 @@ VideoBrisa::VideoBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
     fboBrisa.begin();
     ofClear(0,0,0, 0);
     fboBrisa.end();
-    posVideo = 0;
+    posVideo = 0.6;
 }
-
+ 
 void VideoBrisa::update( float dt ) {
     if( video.isLoaded() )  {
         posVideo = video.getPosition();
@@ -48,7 +48,7 @@ void VideoBrisa::drawControles(int iBrisa) {
             }
         }
         // Timeline
-        ImGui::SliderFloat("Tempo", &posVideo, 0, 1);
+        ImGui::SliderFloat("Tempo", &posVideo, 0.6, 1);
     }
 
     if (ImGui::Button("Carregar Vídeo")) { 

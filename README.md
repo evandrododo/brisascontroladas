@@ -7,9 +7,10 @@ Também inclui alguns "filtros" feitos com shaders e animações feitas diretame
 
 ### TODO List
 
-[ ] Separar classes em pastas e arquivos de header
+[x] Separar classes em pastas e arquivos de header
 [ ] Separar Matriz em dois? (colunas e quadrados)
     [ ] Colunas com rastro no preset
-[ ] Criar classe para detecção corporal
-[ ] Usar HoG na classe criada
+[x] Criar classe para detecção corporal
+[x] Usar ~HoG~ Haar na classe criada
 [ ] Limpar a bagunça do OSC
+[ ] Implementar ciclo de `exit` nas Classes de Brisas

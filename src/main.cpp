@@ -17,10 +17,10 @@ int main(){
 	hGUI = 950;
 
 	// Posição inicial e tamanho da tela de exibição
-	xDisplay = 0;
+	xDisplay = 1920;
 	yDisplay = 0;
-	wDisplay = 1920;
-	hDisplay = 1080;
+	wDisplay = 1024;
+	hDisplay = 768;
 
 	ofGLFWWindowSettings settings;
 

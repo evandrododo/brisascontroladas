@@ -1,10 +1,11 @@
 #ifndef BRISA_H__
 #define BRISA_H__
 
-const float WIDTH = 1920;
-const float HEIGHT = 1080;
+const float WIDTH = 1024;
+const float HEIGHT = 768;
 
 #include "ofxImGui.h"
+#include "ofxTensorFlow2.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "ofxOsc.h"
