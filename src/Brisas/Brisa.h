@@ -8,10 +8,9 @@ const float HEIGHT = 1080;
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "ofxOsc.h"
+
 class Brisa {
-
     public:
-
         vector<Brisa*> *brisasAtivas;
 
         string iconPath;
@@ -83,6 +82,7 @@ class FonteKinect : public Brisa {
     ofxCvColorImage colorImage;
     ofxCvFloatImage floatImage, floatColor;
 };
+
 class VideoBrisa : public Brisa {
     float heightDraw, widthDraw, heightOrig, widthOrig;
 
@@ -124,7 +124,6 @@ class GifBrisa : public Brisa {
 };
 
 class ImagemBrisa : public Brisa {
-
     public:
         ImagemBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
         void draw();
@@ -140,11 +139,9 @@ class ImagemBrisa : public Brisa {
 
         bool converterGray;
         ofxCvGrayscaleImage imagemGray;
-
 };
 
 class PoligonoBrisa : public Brisa {
-
     public:
         PoligonoBrisa(vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver);
         void draw();
@@ -159,7 +156,6 @@ class PoligonoBrisa : public Brisa {
         bool preencher;
         bool trocaVertices;
         bool rotacionar; 
-
 };
 
 #endif
