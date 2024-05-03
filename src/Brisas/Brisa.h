@@ -1,8 +1,8 @@
 #ifndef BRISA_H__
 #define BRISA_H__
 
-const float WIDTH = 1920;
-const float HEIGHT = 1080;
+const float WIDTH = 800;
+const float HEIGHT = 600;
 
 #include "ofxImGui.h"
 #include "ofxOpenCv.h"

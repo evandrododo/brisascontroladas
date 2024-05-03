@@ -52,9 +52,14 @@ void GuiApp::draw() {
     ofBackground(100, 100, 100);
 
     gui.begin();
+    // Janela para adicionar brisas
+    ImGui::SetNextWindowSize(ofVec2f(550, 380), ImGuiCond_Appearing);
+    ImGui::Begin("Adiciona Brisa");
     adicionaBrisa();
+    ImGui::End();
 
-    ImGui::SetNextWindowSize(ofVec2f(20, 10), ImGuiCond_FirstUseEver);
+    // Janela de controles gerais
+    ImGui::SetNextWindowSize(ofVec2f(300, 200), ImGuiCond_Appearing);
     ImGui::Begin("Controles Gerais");
 
     ImGui::Text("%.1f FPS (%.3f ms/frame) ", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);

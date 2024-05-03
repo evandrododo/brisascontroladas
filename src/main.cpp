@@ -19,15 +19,15 @@ int main(){
 	// Posição inicial e tamanho da tela de exibição
 	xDisplay = 0;
 	yDisplay = 0;
-	wDisplay = 1920;
-	hDisplay = 1080;
+	wDisplay = 800;
+	hDisplay = 600;
 
 	ofGLFWWindowSettings settings;
 
 	settings.setPosition(ofVec2f( xDisplay, yDisplay ));
 	settings.setSize(wDisplay, hDisplay);
 	settings.resizable = true;
-	settings.decorated = false;
+	settings.decorated = true;
 	settings.multiMonitorFullScreen = true;
 	settings.numSamples = 8;
 	shared_ptr<ofAppBaseWindow> mainWindow = ofCreateWindow(settings);

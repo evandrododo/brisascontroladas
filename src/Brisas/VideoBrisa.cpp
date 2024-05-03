@@ -69,10 +69,12 @@ void VideoBrisa::listaVideos() {
     //2. Carrega numero de pastas de sequencias
     int nVideosFolder = dirVideosF.listDir("../data/videos/");
 
+    cout << "\nPastas de videos: " << nVideosFolder;
     //4. Abre pastas
     for (int i=0; i<nVideosFolder; i++) {	
         string videoFolder = dirVideosF.getPath( i );
 
+        cout << "\nVideo Folder: " << videoFolder;
         if (ImGui::CollapsingHeader(videoFolder.substr(15).c_str())) {
 
             //2. Carrega numero de pastas de sequencias
