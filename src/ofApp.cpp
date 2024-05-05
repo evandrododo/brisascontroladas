@@ -7,6 +7,9 @@ vector<Brisa*> brisasAtivas;
 void ofApp::setup(){
     ofSetFrameRate(30);
     WindowManager::getInstance().setMainWindowSize(ofGetWidth(), ofGetHeight());
+
+	cout << "OpenGL Version: " << glGetString(GL_VERSION) << endl;
+cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
 }
 
 //--------------------------------------------------------------

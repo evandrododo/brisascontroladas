@@ -27,8 +27,6 @@ class Brisa {
 
         ofShader shaderBrisa;
         string fragShaderPath;
-        float p1Shader, p2Shader, p3Shader;
-        float minp1, maxp1, minp2, maxp2, minp3, maxp3;
         int iBrisaShader;
         bool ligaShader;
         bool clearFrames;
