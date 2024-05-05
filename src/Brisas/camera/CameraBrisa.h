@@ -15,6 +15,9 @@ class CameraBrisa : public Brisa {
     ofVideoGrabber cam;
     int indexDevice;
     bool mirrorHorizontal, mirrorVertical;
+    int camOriginalWidth, camOriginalHeight;
+    int camWidth, camHeight;
+    int camX, camY;
 };
 
 #endif

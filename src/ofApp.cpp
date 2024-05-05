@@ -6,6 +6,7 @@ vector<Brisa*> brisasAtivas;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(30);
+    WindowManager::getInstance().setMainWindowSize(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -99,7 +100,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    WindowManager::getInstance().setMainWindowSize(w, h);
 }
 
 //--------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 PoligonoBrisa::PoligonoBrisa(vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver) {
     setup();
-    // Configura a brisa e defini o ícone
+    // Configura a brisa e define o ícone
     brisasAtivas = brisasParent;
     receiverOSC = receiver;
 
@@ -86,7 +86,10 @@ void PoligonoBrisa::desenhaPoligono(int radius) {
     }
     glPushMatrix();
 
-    glTranslatef(WIDTH/2,HEIGHT/2, 0);
+    int width = WindowManager::getInstance().getMainWindowWidth();
+    int height = WindowManager::getInstance().getMainWindowHeight();
+
+    glTranslatef(width/2, height/2, 0);
 
 
     if (rotacionar) {

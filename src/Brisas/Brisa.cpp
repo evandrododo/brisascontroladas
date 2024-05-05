@@ -2,8 +2,12 @@
 
 void Brisa::setup() {
     //btnConfigBrisa = gui->loadTexture(iconPath);fboBrisa.clear();
-    pixelsBrisa.allocate(WIDTH,HEIGHT, OF_IMAGE_COLOR);
-    fboBrisa.allocate(WIDTH, HEIGHT);
+
+    int width = WindowManager::getInstance().getMainWindowWidth();
+    int height = WindowManager::getInstance().getMainWindowHeight();
+
+    pixelsBrisa.allocate(width, height, OF_IMAGE_COLOR);
+    fboBrisa.allocate(width, height, GL_RGBA);
     fboBrisa.begin();
     ofClear(255,255,255, 0);
     fboBrisa.end();

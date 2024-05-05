@@ -2,6 +2,7 @@
 #include "ofApp.h"
 #include "GuiApp.h"
 #include "ofAppGLFWWindow.h"
+#include "WindowManager.h"
 
 
 //========================================================================
@@ -17,7 +18,7 @@ int main(){
 	hGUI = 950;
 
 	// Posição inicial e tamanho da tela de exibição
-	xDisplay = 1920;
+	xDisplay = 0;
 	yDisplay = 0;
 	wDisplay = 1024;
 	hDisplay = 768;
@@ -27,7 +28,7 @@ int main(){
 	settings.setPosition(ofVec2f( xDisplay, yDisplay ));
 	settings.setSize(wDisplay, hDisplay);
 	settings.resizable = true;
-	settings.decorated = false;
+	settings.decorated = true;
 	settings.multiMonitorFullScreen = true;
 	settings.numSamples = 8;
 	shared_ptr<ofAppBaseWindow> mainWindow = ofCreateWindow(settings);

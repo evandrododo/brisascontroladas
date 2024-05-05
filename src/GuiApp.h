@@ -8,7 +8,7 @@
 #include "Brisas/Brisa.h"
 #include "camera/CameraBrisa.h"
 #include "camera/FinderBrisa.h"
-#include "camera/BodyBrisa.h"
+// #include "camera/BodyBrisa.h"
 #include "kinect/KinectCamBrisa.h"
 #include "kinect/KinectContornosBrisa.h"
 #include "kinect/SombraBrisa.h"

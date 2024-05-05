@@ -5,10 +5,12 @@ const float WIDTH = 1024;
 const float HEIGHT = 768;
 
 #include "ofxImGui.h"
-#include "ofxTensorFlow2.h"
+// #include "ofxTensorFlow2.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "ofxOsc.h"
+#include "../WindowManager.h"
+
 class Brisa {
 
     public:

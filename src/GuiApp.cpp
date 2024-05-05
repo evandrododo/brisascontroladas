@@ -176,11 +176,11 @@ void GuiApp::adicionaBrisa() {
     }
     if (criaFinder) {
         cout << "btn pressionado: criaBody";
-        brisasAtivas.push_back(new FinderBrisa(&brisasAtivas, &coresPaleta));
+        // brisasAtivas.push_back(new FinderBrisa(&brisasAtivas, &coresPaleta));
     }
     if (criaBody) {
         cout << "btn pressionado: criaBody";
-        brisasAtivas.push_back(new BodyBrisa(&brisasAtivas, &coresPaleta));
+        // brisasAtivas.push_back(new BodyBrisa(&brisasAtivas, &coresPaleta));
     }
 
 }

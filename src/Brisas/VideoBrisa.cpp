@@ -75,6 +75,7 @@ void VideoBrisa::listaVideos() {
 
         if (ImGui::CollapsingHeader(videoFolder.substr(15).c_str())) {
 
+
             //2. Carrega numero de pastas de sequencias
             ofDirectory dirVideos;
             int nVideos = dirVideos.listDir(videoFolder.c_str());
