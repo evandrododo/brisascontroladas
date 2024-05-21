@@ -1,9 +1,8 @@
 #include "SombraBrisa.h"
 
-SombraBrisa::SombraBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver) {
+SombraBrisa::SombraBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta) {
     setup();
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
 
     mirrorHorizontal = mirrorVertical = false;
     desenhaBlur = true;
@@ -81,7 +80,7 @@ void SombraBrisa::update( float dt ) {
 }
 
 void SombraBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void SombraBrisa::drawControles(int iBrisa) {

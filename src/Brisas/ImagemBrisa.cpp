@@ -1,20 +1,13 @@
 #include "Brisa.h"
 
-ImagemBrisa::ImagemBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
-    setup();
+ImagemBrisa::ImagemBrisa(vector<Brisa*> *brisasParent) {
+    Brisa::setup();
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     // Configura a brisa e defini o ícone
-    fboBrisa.allocate(WIDTH, HEIGHT);
     fboBrisa.begin();
     ofClear(0,0,0, 0);
     fboBrisa.end();
 
-    rotacao = 0;
-    proporcao = 1;
-    deslocX = deslocY = 0;
-    rotacionaSozinho = false;
-    torceSozinho = false;
     converterGray = false;
 }
 
@@ -53,7 +46,7 @@ void ImagemBrisa::update( float dt ) {
 }
 
 void ImagemBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void ImagemBrisa::drawControles(int iBrisa) {
@@ -67,9 +60,9 @@ void ImagemBrisa::drawControles(int iBrisa) {
     } 
 
     ImGui::Checkbox("Converter pra p&b", &converterGray);
-    desenharControlesDistorcao();
 
     desenharControlesShader();
+    Brisa::drawControles(iBrisa);
 }
 
 

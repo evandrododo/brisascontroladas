@@ -1,9 +1,8 @@
 #include "Brisa.h"
 
-GifBrisa::GifBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+GifBrisa::GifBrisa(vector<Brisa*> *brisasParent) {
     setup();
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     cout << brisasAtivas->size();
     fboBrisa.allocate(WIDTH, HEIGHT);
     fboBrisa.begin();
@@ -39,7 +38,7 @@ void GifBrisa::update( float dt ) {
 }
 
 void GifBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void GifBrisa::drawControles(int iBrisa) {

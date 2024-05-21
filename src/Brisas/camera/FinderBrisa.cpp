@@ -69,7 +69,7 @@ void FinderBrisa::update( float dt ) {
 }
 
 void FinderBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void FinderBrisa::drawControles(int iBrisa) {

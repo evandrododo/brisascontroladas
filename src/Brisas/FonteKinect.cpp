@@ -125,7 +125,7 @@ void FonteKinect::update( float dt ) {
 }
 
 void FonteKinect::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void FonteKinect::drawControles() {

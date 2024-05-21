@@ -1,9 +1,8 @@
 #include "Brisa.h"
 
-VideoBrisa::VideoBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+VideoBrisa::VideoBrisa(vector<Brisa*> *brisasParent) {
     setup();
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     fboBrisa.allocate(WIDTH, HEIGHT);
     fboBrisa.begin();
     ofClear(0,0,0, 0);
@@ -29,7 +28,7 @@ void VideoBrisa::update( float dt ) {
 }
 
 void VideoBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void VideoBrisa::drawControles(int iBrisa) {

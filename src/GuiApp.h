@@ -14,8 +14,6 @@
 #include "kinect/SombraBrisa.h"
 #include "kinect/MatrizBrisa.h"
 
-#define PORT_OSC 9001
-
 class GuiApp : public ofBaseApp
 {
 public:
@@ -45,5 +43,4 @@ public:
     ofBlendMode blendMode;
     int iBlend;
     bool desenhaMiniaturas;
-    ofxOscReceiver receiverOSC;
 };

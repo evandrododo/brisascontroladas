@@ -30,8 +30,6 @@ void GuiApp::setup(){
 
     iBlend = 2;
     anguloKinect = 0;
-
-    receiverOSC.setup( PORT_OSC );
 }
 
 void GuiApp::update(){
@@ -140,35 +138,35 @@ void GuiApp::adicionaBrisa() {
 
     if (criaVideo) {
         cout << "btn pressionado: criaVideo";
-        brisasAtivas.push_back(new VideoBrisa(&brisasAtivas, &receiverOSC));
+        brisasAtivas.push_back(new VideoBrisa(&brisasAtivas));
     }
     if (criaPoligono) {
         cout << "btn pressionado: criaPoligono";
-        brisasAtivas.push_back(new PoligonoBrisa(&brisasAtivas, &coresPaleta, &receiverOSC));
+        brisasAtivas.push_back(new PoligonoBrisa(&brisasAtivas, &coresPaleta));
     }
     if (criaKinect) {
         cout << "btn pressionado: criaKinect";
-        brisasAtivas.push_back(new KinectContornosBrisa(&kinectGlobal, &brisasAtivas, &receiverOSC));
+        brisasAtivas.push_back(new KinectContornosBrisa(&kinectGlobal, &brisasAtivas));
     }
     if (criaImg) {
         cout << "btn pressionado: criaImg";
-        brisasAtivas.push_back(new ImagemBrisa(&brisasAtivas, &receiverOSC));
+        brisasAtivas.push_back(new ImagemBrisa(&brisasAtivas));
     }
     if (criaGif) {
         cout << "btn pressionado: criaGif";
-        brisasAtivas.push_back(new GifBrisa(&brisasAtivas, &receiverOSC));
+        brisasAtivas.push_back(new GifBrisa(&brisasAtivas));
     }
     if (criaMatriz) {
         cout << "btn pressionado: criaMatriz";
-        brisasAtivas.push_back(new MatrizBrisa(&kinectGlobal, &brisasAtivas, coresPaleta, &receiverOSC));
+        brisasAtivas.push_back(new MatrizBrisa(&kinectGlobal, &brisasAtivas, coresPaleta));
     }
     if (criaSombras) {
         cout << "btn pressionado: criaSombras";
-        brisasAtivas.push_back(new SombraBrisa(&kinectGlobal, &brisasAtivas, &coresPaleta, &receiverOSC));
+        brisasAtivas.push_back(new SombraBrisa(&kinectGlobal, &brisasAtivas, &coresPaleta));
     }
     if (criaKinectCam) {
         cout << "btn pressionado: criaKinectCam";
-        brisasAtivas.push_back(new KinectCamBrisa(&kinectGlobal, &brisasAtivas, &receiverOSC));
+        brisasAtivas.push_back(new KinectCamBrisa(&kinectGlobal, &brisasAtivas));
     }
     if (criaCamera) {
         cout << "btn pressionado: criaCamera";

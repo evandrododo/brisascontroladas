@@ -10,7 +10,7 @@ void Brisa::setup()
     pixelsBrisa.allocate(width, height, OF_IMAGE_COLOR);
     fboBrisa.allocate(width, height, GL_RGBA);
     fboBrisa.begin();
-    ofClear(255, 255, 255, 0);
+    ofClear(0,0,0, 0);
     fboBrisa.end();
 
     // variaveis do shader
@@ -23,7 +23,10 @@ void Brisa::setup()
     opacidade = 0;
     // Inicializa variaveis de distorções
     brilhoBrisa = contrasteBrisa = 0.5;
-    deslocX = deslocY = 0;
+    deslocX = deslocY = 0; 
+    rotacao = 0;
+    proporcao = 1;
+    rotacionaSozinho = false;
 }
 
 void Brisa::update(float dt)
@@ -36,10 +39,46 @@ void Brisa::mostraBrisas()
 
 void Brisa::draw()
 {
+    int width = WindowManager::getInstance().getMainWindowWidth();
+    int height = WindowManager::getInstance().getMainWindowHeight();
+
+    if (ligaShader)
+    {
+        shaderBrisa.begin();
+        // Para pegar a textura de outra brisa
+        // if (iBrisaShader > -1 && brisasAtivas->at(iBrisaShader)->fboBrisa.isAllocated())
+        // {
+        //     shaderBrisa.setUniformTexture("texture1", brisasAtivas->at(iBrisaShader)->fboBrisa.getTextureReference(), 1);
+        // }
+        shaderBrisa.setUniformTexture("texture0", fboBrisa.getTextureReference(), 0);
+        shaderBrisa.setUniform2f("resolution", fboBrisa.getWidth(), fboBrisa.getHeight());
+
+        ofSetColor(255, 255, 255, opacidade);
+
+        ofPushMatrix();
+        ofTranslate(width/2 + deslocX, height/2 + deslocY, 0);
+        fboBrisa.setAnchorPercent(0.5, 0.5);
+        if (rotacionaSozinho) {
+            rotacao += ofNoise(ofGetElapsedTimef());
+            if (rotacao > 360) rotacao = 0;
+        }
+        ofRotate(rotacao);
+
+        ofScale(proporcao, proporcao, 1);
+        fboBrisa.draw(0, 0);
+        ofPopMatrix();
+        shaderBrisa.end();
+    }
+    else
+    {
+        ofSetColor(255, 255, 255, opacidade);
+        fboBrisa.draw(0, 0);
+    }
 }
 
 void Brisa::drawControles(int iBrisa)
 {
+    desenharControlesPosicao();
 }
 
 void Brisa::desenhaMiniatura(int i, bool ativa)
@@ -237,39 +276,13 @@ void Brisa::listaShaders()
     }
 }
 
-void Brisa::aplicarShader()
+void Brisa::desenharControlesPosicao()
 {
-
-    if (ligaShader)
+    if (ImGui::CollapsingHeader("Posição e Tamanho"))
     {
-        shaderBrisa.begin();
-        // Para pegar a textura de outra brisa
-        // if (iBrisaShader > -1 && brisasAtivas->at(iBrisaShader)->fboBrisa.isAllocated())
-        // {
-        //     shaderBrisa.setUniformTexture("texture1", brisasAtivas->at(iBrisaShader)->fboBrisa.getTextureReference(), 1);
-        // }
-        shaderBrisa.setUniformTexture("texture0", fboBrisa.getTextureReference(), 0);
-        shaderBrisa.setUniform2f("resolution", fboBrisa.getWidth(), fboBrisa.getHeight());
+        int width = WindowManager::getInstance().getMainWindowWidth();
+        int height = WindowManager::getInstance().getMainWindowHeight();
 
-        ofSetColor(255, 255, 255, opacidade);
-        
-        fboBrisa.draw(0, 0);
-        shaderBrisa.end();
-
-        
-        
-    }
-    else
-    {
-        ofSetColor(255, 255, 255, opacidade);
-        fboBrisa.draw(0, 0);
-    }
-}
-
-void Brisa::desenharControlesDistorcao()
-{
-    if (ImGui::CollapsingHeader("Distorções"))
-    {
         ImGui::SliderFloat("brilho", &brilhoBrisa, 0, 1);
         ImGui::SameLine();
         ImGui::Text("n funciona");
@@ -282,6 +295,5 @@ void Brisa::desenharControlesDistorcao()
         ImGui::SliderFloat("Rotação", &rotacao, -180, 180);
         ImGui::SameLine();
         ImGui::Checkbox("Automático", &rotacionaSozinho);
-        ImGui::Checkbox("Torcer automático", &torceSozinho);
     }
 }

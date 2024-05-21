@@ -34,11 +34,12 @@ void CameraBrisa::update(float dt)
 
 void CameraBrisa::draw()
 {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void CameraBrisa::drawControles(int iBrisa)
 {
+    Brisa::drawControles(iBrisa);
     int width = WindowManager::getInstance().getMainWindowWidth();
     int height = WindowManager::getInstance().getMainWindowHeight();
     if (ImGui::Button("Carregar Camera"))
@@ -54,7 +55,6 @@ void CameraBrisa::drawControles(int iBrisa)
         {
             if (ImGui::Selectable(devices[i].deviceName.c_str()))
             {
-
                 indexDevice = i;
                 cam.setDeviceID(indexDevice);
                 cam.setup(width, height);

@@ -1,10 +1,9 @@
 #include "KinectCamBrisa.h"
 
-KinectCamBrisa::KinectCamBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+KinectCamBrisa::KinectCamBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent) {
     setup();
     // Configura a brisa e defini o ícone
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     mirrorHorizontal = mirrorVertical = false;
     clearFrames = true;
     nivelFade = 0;
@@ -34,7 +33,7 @@ void KinectCamBrisa::update( float dt ) {
 }
 
 void KinectCamBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void KinectCamBrisa::drawControles(int iBrisa) {
