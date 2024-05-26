@@ -39,7 +39,6 @@ void CameraBrisa::draw()
 
 void CameraBrisa::drawControles(int iBrisa)
 {
-    Brisa::drawControles(iBrisa);
     int width = WindowManager::getInstance().getMainWindowWidth();
     int height = WindowManager::getInstance().getMainWindowHeight();
     if (ImGui::Button("Carregar Camera"))
@@ -67,74 +66,78 @@ void CameraBrisa::drawControles(int iBrisa)
         ImGui::EndPopup();
     }
 
-    // Mostra o ratio da camera quando ela está carregada, assim como a largura e altura originais
-    if (cam.isInitialized())
+    if (ImGui::CollapsingHeader("Cam: Redimensionar"))
     {
-        ImGui::Text("Resolução: %dx%d", camOriginalWidth, camOriginalHeight);
-        ImGui::Text("Ratio: %.2f", (float)camOriginalWidth / camOriginalHeight);
-    }
-
-    // Controle de tamanho da camera
-    ImGui::SliderInt("Largura", &camWidth, 0, width * 2);
-    ImGui::SliderInt("Altura", &camHeight, 0, height * 2);
-
-    // Controle de posição da camera
-    ImGui::SliderInt("X", &camX, -width, width);
-    ImGui::SliderInt("Y", &camY, -height, height);
-
-    // TODO: fbo não tem mirror
-    // Controle de espelhamento
-    // ImGui::Checkbox("Espelhamento Horizontal", &mirrorHorizontal);
-    // ImGui::Checkbox("Espelhamento Vertical", &mirrorVertical);
-
-    // Botão para redimensionar e centralizar a camera, estilo "cover" do CSS
-    if (ImGui::Button("Redimensionar Cover"))
-    {
-        float ratio = (float)camOriginalWidth / camOriginalHeight;
-        float ratioCam = (float)camWidth / camHeight;
-
-        if (ratioCam > ratio)
+        // Mostra o ratio da camera quando ela está carregada, assim como a largura e altura originais
+        if (cam.isInitialized())
         {
-            camWidth = width;
-            camHeight = camWidth / ratio;
-            camX = 0;
+            ImGui::Text("Resolução: %dx%d", camOriginalWidth, camOriginalHeight);
+            ImGui::Text("Ratio: %.2f", (float)camOriginalWidth / camOriginalHeight);
+        }
+
+        // Controle de tamanho da camera
+        ImGui::SliderInt("Largura", &camWidth, 0, width * 2);
+        ImGui::SliderInt("Altura", &camHeight, 0, height * 2);
+
+        // Controle de posição da camera
+        ImGui::SliderInt("X", &camX, -width, width);
+        ImGui::SliderInt("Y", &camY, -height, height);
+
+        // TODO: fbo não tem mirror
+        // Controle de espelhamento
+        // ImGui::Checkbox("Espelhamento Horizontal", &mirrorHorizontal);
+        // ImGui::Checkbox("Espelhamento Vertical", &mirrorVertical);
+
+        // Botão para redimensionar e centralizar a camera, estilo "cover" do CSS
+        if (ImGui::Button("Redimensionar Cover"))
+        {
+            float ratio = (float)camOriginalWidth / camOriginalHeight;
+            float ratioCam = (float)camWidth / camHeight;
+
+            if (ratioCam > ratio)
+            {
+                camWidth = width;
+                camHeight = camWidth / ratio;
+                camX = 0;
+                camY = (height - camHeight) / 2;
+            }
+            else
+            {
+                camHeight = height;
+                camWidth = camHeight * ratio;
+                camY = 0;
+                camX = (width - camWidth) / 2;
+            }
+        }
+
+        // Botão para redimensionar e centralizar a camera, estilo "contain" do CSS
+        if (ImGui::Button("Redimensionar Contain"))
+        {
+            float ratio = (float)camOriginalWidth / camOriginalHeight;
+            float ratioCam = (float)camWidth / camHeight;
+
+            if (ratioCam > ratio)
+            {
+                camHeight = height;
+                camWidth = camHeight * ratio;
+                camY = 0;
+                camX = (width - camWidth) / 2;
+            }
+            else
+            {
+                camWidth = width;
+                camHeight = camWidth / ratio;
+                camX = 0;
+                camY = (height - camHeight) / 2;
+            }
+        }
+
+        // Botão para centralizar a camera
+        if (ImGui::Button("Centralizar"))
+        {
+            camX = (width - camWidth) / 2;
             camY = (height - camHeight) / 2;
         }
-        else
-        {
-            camHeight = height;
-            camWidth = camHeight * ratio;
-            camY = 0;
-            camX = (width - camWidth) / 2;
-        }
     }
-
-    // Botão para redimensionar e centralizar a camera, estilo "contain" do CSS
-    if (ImGui::Button("Redimensionar Contain"))
-    {
-        float ratio = (float)camOriginalWidth / camOriginalHeight;
-        float ratioCam = (float)camWidth / camHeight;
-
-        if (ratioCam > ratio)
-        {
-            camHeight = height;
-            camWidth = camHeight * ratio;
-            camY = 0;
-            camX = (width - camWidth) / 2;
-        }
-        else
-        {
-            camWidth = width;
-            camHeight = camWidth / ratio;
-            camX = 0;
-            camY = (height - camHeight) / 2;
-        }
-    }
-
-    // Botão para centralizar a camera
-    if (ImGui::Button("Centralizar"))
-    {
-        camX = (width - camWidth) / 2;
-        camY = (height - camHeight) / 2;
-    }
+    Brisa::drawControles(iBrisa);
 }

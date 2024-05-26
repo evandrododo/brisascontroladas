@@ -61,7 +61,7 @@ void PoligonoBrisa::drawControles(int iBrisa) {
 
     ImGui::SliderInt("Vértices", &vertices, 0, 9);ImGui::SameLine();
     ImGui::Checkbox("Troca sozinho", &trocaVertices);
-    ImGui::SliderInt("Quantidade", &quantidade, 0, 30);
+    ImGui::SliderInt("Quantidade", &quantidade, 0, 100);
     ImGui::SliderInt("Distância", &distancia, 1, 150);
 
     ImGui::Checkbox("Rotacionar", &rotacionar);

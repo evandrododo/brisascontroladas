@@ -12,11 +12,20 @@ public:
         mainWindowHeight = height;
     }
 
+    void setGuiWindowSize(int width, int height) {
+        guiWindowWidth = width;
+        guiWindowHeight = height;
+    }
+
     int getMainWindowWidth() { return mainWindowWidth; }
     int getMainWindowHeight() { return mainWindowHeight; }
+    int getGuiWindowWidth() { return guiWindowWidth; }
+    int getGuiWindowHeight() { return guiWindowHeight; }
 
 private:
     WindowManager() {} // Construtor privado
     int mainWindowWidth = 1024;
     int mainWindowHeight = 768;
+    int guiWindowWidth = 1500;
+    int guiWindowHeight = 800;
 };

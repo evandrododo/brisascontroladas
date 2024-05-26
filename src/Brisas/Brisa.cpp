@@ -10,7 +10,7 @@ void Brisa::setup()
     pixelsBrisa.allocate(width, height, OF_IMAGE_COLOR);
     fboBrisa.allocate(width, height, GL_RGBA);
     fboBrisa.begin();
-    ofClear(0,0,0, 0);
+    ofClear(0, 0, 0, 0);
     fboBrisa.end();
 
     // variaveis do shader
@@ -23,7 +23,7 @@ void Brisa::setup()
     opacidade = 0;
     // Inicializa variaveis de distorções
     brilhoBrisa = contrasteBrisa = 0.5;
-    deslocX = deslocY = 0; 
+    deslocX = deslocY = 0;
     rotacao = 0;
     proporcao = 1;
     rotacionaSozinho = false;
@@ -42,37 +42,37 @@ void Brisa::draw()
     int width = WindowManager::getInstance().getMainWindowWidth();
     int height = WindowManager::getInstance().getMainWindowHeight();
 
+    ofSetColor(255, 255, 255, opacidade);
     if (ligaShader)
     {
         shaderBrisa.begin();
         // Para pegar a textura de outra brisa
-        // if (iBrisaShader > -1 && brisasAtivas->at(iBrisaShader)->fboBrisa.isAllocated())
-        // {
-        //     shaderBrisa.setUniformTexture("texture1", brisasAtivas->at(iBrisaShader)->fboBrisa.getTextureReference(), 1);
-        // }
+        if (iBrisaShader > -1 && brisasAtivas->at(iBrisaShader)->fboBrisa.isAllocated())
+        {
+            shaderBrisa.setUniformTexture("texturaBrisaExterna", brisasAtivas->at(iBrisaShader)->fboBrisa.getTextureReference(), 1);
+        }
         shaderBrisa.setUniformTexture("texture0", fboBrisa.getTextureReference(), 0);
         shaderBrisa.setUniform2f("resolution", fboBrisa.getWidth(), fboBrisa.getHeight());
-
-        ofSetColor(255, 255, 255, opacidade);
-
-        ofPushMatrix();
-        ofTranslate(width/2 + deslocX, height/2 + deslocY, 0);
-        fboBrisa.setAnchorPercent(0.5, 0.5);
-        if (rotacionaSozinho) {
-            rotacao += ofNoise(ofGetElapsedTimef());
-            if (rotacao > 360) rotacao = 0;
-        }
-        ofRotate(rotacao);
-
-        ofScale(proporcao, proporcao, 1);
-        fboBrisa.draw(0, 0);
-        ofPopMatrix();
-        shaderBrisa.end();
     }
-    else
+
+    ofPushMatrix();
+    ofTranslate(width / 2 + deslocX, height / 2 + deslocY, 0);
+    fboBrisa.setAnchorPercent(0.5, 0.5);
+    if (rotacionaSozinho)
     {
-        ofSetColor(255, 255, 255, opacidade);
-        fboBrisa.draw(0, 0);
+        rotacao += ofNoise(ofGetElapsedTimef());
+        if (rotacao > 360)
+            rotacao = 0;
+    }
+    ofRotate(rotacao);
+
+    ofScale(proporcao, proporcao, 1);
+    fboBrisa.draw(0, 0);
+    ofPopMatrix();
+
+    if (ligaShader)
+    {
+        shaderBrisa.end();
     }
 }
 
@@ -283,15 +283,11 @@ void Brisa::desenharControlesPosicao()
         int width = WindowManager::getInstance().getMainWindowWidth();
         int height = WindowManager::getInstance().getMainWindowHeight();
 
-        ImGui::SliderFloat("brilho", &brilhoBrisa, 0, 1);
-        ImGui::SameLine();
-        ImGui::Text("n funciona");
-        ImGui::SliderFloat("contraste", &contrasteBrisa, 0, 1);
-        ImGui::SameLine();
-        ImGui::Text("n funciona");
-        ImGui::SliderInt("desloca X", &deslocX, -200, 200);
-        ImGui::SliderInt("desloca Y", &deslocY, -200, 200);
-        ImGui::SliderFloat("Proporcao", &proporcao, 0.2, 2);
+        // ImGui::SliderFloat("brilho", &brilhoBrisa, 0, 1);
+        // ImGui::SliderFloat("contraste", &contrasteBrisa, 0, 1);
+        ImGui::SliderInt("X", &deslocX, -200, 200);
+        ImGui::SliderInt("Y", &deslocY, -200, 200);
+        ImGui::SliderFloat("Proporcao", &proporcao, 0.2, 3, "%.2f", 2);
         ImGui::SliderFloat("Rotação", &rotacao, -180, 180);
         ImGui::SameLine();
         ImGui::Checkbox("Automático", &rotacionaSozinho);

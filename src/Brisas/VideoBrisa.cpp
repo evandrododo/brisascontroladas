@@ -57,6 +57,7 @@ void VideoBrisa::drawControles(int iBrisa) {
         listaVideos(); 
         ImGui::EndPopup();
     }
+    Brisa::drawControles(iBrisa);
 }
 
 
