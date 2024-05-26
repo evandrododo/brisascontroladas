@@ -8,7 +8,7 @@
 #   The location of your root openFrameworks installation
 #       (default) OF_ROOT = ../../.. 
 ################################################################################
-OF_ROOT = /home/evandro/Documentos/arte/of
+OF_ROOT = /Users/dodo/Documents/arte/of_v0.12.0_osx_release/
 
 ################################################################################
 # PROJECT ROOT
