@@ -1,10 +1,9 @@
 #include "KinectContornosBrisa.h"
 
-KinectContornosBrisa::KinectContornosBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+KinectContornosBrisa::KinectContornosBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent) {
     setup();
     // Configura a brisa e defini o ícone
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     mirrorHorizontal = mirrorVertical = false;
     clearFrames = true;
     nivelFade = 20;
@@ -42,7 +41,7 @@ void KinectContornosBrisa::update( float dt ) {
 }
 
 void KinectContornosBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void KinectContornosBrisa::drawControles(int iBrisa) {

@@ -1,10 +1,9 @@
 #include "MatrizBrisa.h"
 
-MatrizBrisa::MatrizBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> paletaGeral, ofxOscReceiver *receiver) {
+MatrizBrisa::MatrizBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> paletaGeral) {
     setup();
     // Configura a brisa e defini o ícone
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     camera = 1; // 0 = camera RGB (default) | 1 = camera Depth
 
     desenhaBlur = true;
@@ -81,7 +80,7 @@ void MatrizBrisa::update( float dt ) {
 }
 
 void MatrizBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void MatrizBrisa::desenhaPonto(int brilho, int width, int height, int x, int y, int gapX, int gapY) {

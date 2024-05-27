@@ -10,11 +10,14 @@ class CameraBrisa : public Brisa {
     void draw();
     void update( float dt );
 
-    void drawControles(int iBrisa);
+    void drawControles(int iBrisa) override;
 
     ofVideoGrabber cam;
     int indexDevice;
     bool mirrorHorizontal, mirrorVertical;
+    int camOriginalWidth, camOriginalHeight;
+    int camWidth, camHeight;
+    int camX, camY;
 };
 
 #endif

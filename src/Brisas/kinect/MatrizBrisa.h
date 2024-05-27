@@ -6,7 +6,7 @@ class MatrizBrisa : public Brisa {
     int camera;
 
     public:
-    MatrizBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> coresPaleta, ofxOscReceiver *receiver);
+    MatrizBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> coresPaleta);
     void draw();
     void update(float dt);
 

@@ -31,6 +31,4 @@ class ofApp : public ofBaseApp{
         shared_ptr<GuiApp> gui;
         shared_ptr<ofAppBaseWindow> window;
         shared_ptr<ofBaseGLRenderer> gl;
-
-        ofxOscReceiver receiverOSC;
 };

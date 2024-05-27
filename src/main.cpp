@@ -2,6 +2,7 @@
 #include "ofApp.h"
 #include "GuiApp.h"
 #include "ofAppGLFWWindow.h"
+#include "WindowManager.h"
 
 
 //========================================================================
@@ -11,7 +12,7 @@ int main(){
 	int xDisplay, yDisplay, wDisplay, hDisplay;
 	
 	// Posição inicial e tamanho da tela de controle
-	xGUI = 50;
+	xGUI = 1500;
 	yGUI = 20;
 	wGUI = 1333;
 	hGUI = 950;
@@ -19,8 +20,8 @@ int main(){
 	// Posição inicial e tamanho da tela de exibição
 	xDisplay = 0;
 	yDisplay = 0;
-	wDisplay = 800;
-	hDisplay = 600;
+	wDisplay = 1024;
+	hDisplay = 768;
 
 	ofGLFWWindowSettings settings;
 

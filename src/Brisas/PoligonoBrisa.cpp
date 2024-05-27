@@ -1,10 +1,9 @@
 #include "Brisa.h"
 
-PoligonoBrisa::PoligonoBrisa(vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver) {
+PoligonoBrisa::PoligonoBrisa(vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta) {
     setup();
-    // Configura a brisa e defini o ícone
+    // Configura a brisa e define o ícone
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
 
     vertices = 6;
     trocaVertices = true;
@@ -51,7 +50,7 @@ void PoligonoBrisa::update( float dt ) {
 }
 
 void PoligonoBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void PoligonoBrisa::drawControles(int iBrisa) {
@@ -62,7 +61,7 @@ void PoligonoBrisa::drawControles(int iBrisa) {
 
     ImGui::SliderInt("Vértices", &vertices, 0, 9);ImGui::SameLine();
     ImGui::Checkbox("Troca sozinho", &trocaVertices);
-    ImGui::SliderInt("Quantidade", &quantidade, 0, 30);
+    ImGui::SliderInt("Quantidade", &quantidade, 0, 100);
     ImGui::SliderInt("Distância", &distancia, 1, 150);
 
     ImGui::Checkbox("Rotacionar", &rotacionar);
@@ -70,6 +69,7 @@ void PoligonoBrisa::drawControles(int iBrisa) {
 
     ImGui::Checkbox("Ligar Shader", &ligaShader);
 
+    Brisa::drawControles(iBrisa);
 }
 
 
@@ -86,7 +86,10 @@ void PoligonoBrisa::desenhaPoligono(int radius) {
     }
     glPushMatrix();
 
-    glTranslatef(WIDTH/2,HEIGHT/2, 0);
+    int width = WindowManager::getInstance().getMainWindowWidth();
+    int height = WindowManager::getInstance().getMainWindowHeight();
+
+    glTranslatef(width/2, height/2, 0);
 
 
     if (rotacionar) {

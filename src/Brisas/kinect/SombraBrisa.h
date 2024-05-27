@@ -6,7 +6,7 @@ class SombraBrisa : public Brisa {
     int camera;
 
     public:
-    SombraBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver);
+    SombraBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta);
     void draw();
     void update(float dt);
 

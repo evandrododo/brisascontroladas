@@ -1,13 +1,15 @@
 #ifndef BRISA_H__
 #define BRISA_H__
 
-const float WIDTH = 800;
-const float HEIGHT = 600;
+const float WIDTH = 1024;
+const float HEIGHT = 768;
 
 #include "ofxImGui.h"
+// #include "ofxTensorFlow2.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "ofxOsc.h"
+#include "../WindowManager.h"
 
 class Brisa {
     public:
@@ -23,8 +25,6 @@ class Brisa {
 
         ofShader shaderBrisa;
         string fragShaderPath;
-        float p1Shader, p2Shader, p3Shader;
-        float minp1, maxp1, minp2, maxp2, minp3, maxp3;
         int iBrisaShader;
         bool ligaShader;
         bool clearFrames;
@@ -41,19 +41,20 @@ class Brisa {
         void listaShaders();
         void loadShader(string shader);
         void listaBrisas();
-        void aplicarShader();
         void desenharControlesShader();
 
         float brilhoBrisa, contrasteBrisa;
-        bool rotacionaSozinho, torceSozinho;
+        bool rotacionaSozinho;
         float proporcao, rotacao;
         int deslocX, deslocY;
         int opacidade;
-        void desenharControlesDistorcao();
+        
+        // Posição e tamanho da brisa
+        void desenharControlesPosicao();
+        int fboWidth, fboHeight;
+        int fboX, fboY;
 
         void trazerFrente( int iBrisa ), esconderTras( int iBrisa );
-
-        ofxOscReceiver *receiverOSC;
 };
 
 class FonteKinect : public Brisa {
@@ -65,7 +66,7 @@ class FonteKinect : public Brisa {
     public:
     FonteKinect(ofxKinect *kinectGlobal, int cameraSelecionada);
     void setBlur( int novoBlur );
-    void draw();
+    void draw() override;
     void update( float dt );
 
     void ligaKinect();
@@ -87,8 +88,8 @@ class VideoBrisa : public Brisa {
     float heightDraw, widthDraw, heightOrig, widthOrig;
 
     public:
-    VideoBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
-    void draw();
+    VideoBrisa(vector<Brisa*> *brisasParent);
+    void draw() override;
     void update(float dt);
 
     ofVideoPlayer video;
@@ -97,7 +98,7 @@ class VideoBrisa : public Brisa {
 
     float posVideo;
 
-    void drawControles(int iBrisa);
+    void drawControles(int iBrisa) override;
 
     void listaVideos();
     void setupVideo(string videoPath);
@@ -108,8 +109,8 @@ class GifBrisa : public Brisa {
 
 
     public:
-    GifBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
-    void draw();
+    GifBrisa(vector<Brisa*> *brisasParent);
+    void draw() override;
     void update(float dt);
 
     ofVideoPlayer video;
@@ -117,7 +118,7 @@ class GifBrisa : public Brisa {
     float proporcao, rotacao;
     int deslocX, deslocY;
 
-    void drawControles(int iBrisa);
+    void drawControles(int iBrisa) override;
 
     void listaGifs();
     void setupVideo(string videoPath);
@@ -125,14 +126,14 @@ class GifBrisa : public Brisa {
 
 class ImagemBrisa : public Brisa {
     public:
-        ImagemBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
-        void draw();
+        ImagemBrisa(vector<Brisa*> *brisasParent);
+        void draw() override;
         void update(float dt);
 
         ofImage img;
         string caminhoImagem;
 
-        void drawControles(int iBrisa);
+        void drawControles(int iBrisa) override;
 
         void listaImagens();
         void setupImagem(string imgPath);
@@ -143,11 +144,11 @@ class ImagemBrisa : public Brisa {
 
 class PoligonoBrisa : public Brisa {
     public:
-        PoligonoBrisa(vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta, ofxOscReceiver *receiver);
-        void draw();
+        PoligonoBrisa(vector<Brisa*> *brisasParent, vector<ImVec4> *coresPaleta);
+        void draw() override;
         void update( float dt );
 
-        void drawControles(int iBrisa);
+        void drawControles(int iBrisa) override;
         void desenhaPoligono(int radius);
         ImVec4 corBrisa, corComplementar;
         int vertices;

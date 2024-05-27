@@ -1,16 +1,15 @@
 #include "Brisa.h"
 
-VideoBrisa::VideoBrisa(vector<Brisa*> *brisasParent, ofxOscReceiver *receiver) {
+VideoBrisa::VideoBrisa(vector<Brisa*> *brisasParent) {
     setup();
     brisasAtivas = brisasParent;
-    receiverOSC = receiver;
     fboBrisa.allocate(WIDTH, HEIGHT);
     fboBrisa.begin();
     ofClear(0,0,0, 0);
     fboBrisa.end();
-    posVideo = 0;
+    posVideo = 0.6;
 }
-
+ 
 void VideoBrisa::update( float dt ) {
     if( video.isLoaded() )  {
         posVideo = video.getPosition();
@@ -29,7 +28,7 @@ void VideoBrisa::update( float dt ) {
 }
 
 void VideoBrisa::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void VideoBrisa::drawControles(int iBrisa) {
@@ -48,7 +47,7 @@ void VideoBrisa::drawControles(int iBrisa) {
             }
         }
         // Timeline
-        ImGui::SliderFloat("Tempo", &posVideo, 0, 1);
+        ImGui::SliderFloat("Tempo", &posVideo, 0.6, 1);
     }
 
     if (ImGui::Button("Carregar Vídeo")) { 
@@ -58,6 +57,7 @@ void VideoBrisa::drawControles(int iBrisa) {
         listaVideos(); 
         ImGui::EndPopup();
     }
+    Brisa::drawControles(iBrisa);
 }
 
 
@@ -76,6 +76,7 @@ void VideoBrisa::listaVideos() {
 
         cout << "\nVideo Folder: " << videoFolder;
         if (ImGui::CollapsingHeader(videoFolder.substr(15).c_str())) {
+
 
             //2. Carrega numero de pastas de sequencias
             ofDirectory dirVideos;

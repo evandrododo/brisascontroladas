@@ -2,3 +2,4 @@ ofxImGui
 ofxKinect
 ofxOpenCv
 ofxOsc
+ofxTensorFlow2

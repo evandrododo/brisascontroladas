@@ -8,13 +8,11 @@
 #include "Brisas/Brisa.h"
 #include "camera/CameraBrisa.h"
 #include "camera/FinderBrisa.h"
-#include "camera/BodyBrisa.h"
+// #include "camera/BodyBrisa.h"
 #include "kinect/KinectCamBrisa.h"
 #include "kinect/KinectContornosBrisa.h"
 #include "kinect/SombraBrisa.h"
 #include "kinect/MatrizBrisa.h"
-
-#define PORT_OSC 9001
 
 class GuiApp : public ofBaseApp
 {
@@ -45,5 +43,4 @@ public:
     ofBlendMode blendMode;
     int iBlend;
     bool desenhaMiniaturas;
-    ofxOscReceiver receiverOSC;
 };

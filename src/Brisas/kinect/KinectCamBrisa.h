@@ -7,7 +7,7 @@ class KinectCamBrisa : public Brisa {
 
     float nivelFade;
     public:
-    KinectCamBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
+    KinectCamBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent);
     void draw();
     void update( float dt );
 

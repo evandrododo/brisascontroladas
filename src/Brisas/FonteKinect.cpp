@@ -125,7 +125,7 @@ void FonteKinect::update( float dt ) {
 }
 
 void FonteKinect::draw() {
-    aplicarShader();
+    Brisa::draw();
 }
 
 void FonteKinect::drawControles() {
@@ -152,10 +152,12 @@ void FonteKinect::drawControles() {
 }
 
 void FonteKinect::drawMiniatura() {
-    int xMini = 954;
-    int yMini = 10;
+    int widthWindow = WindowManager::getInstance().getGuiWindowWidth();
+    int heightWindow = WindowManager::getInstance().getGuiWindowHeight();
     int miniaturaWidth = 308;
     int miniaturaHeight = 231;
+    int xMini = widthWindow - miniaturaWidth - 10; 
+    int yMini = heightWindow - miniaturaHeight - 10;
     fboBrisa.draw(xMini, yMini ,miniaturaWidth,miniaturaHeight);
 }
 

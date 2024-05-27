@@ -4,7 +4,7 @@ class KinectContornosBrisa : public Brisa {
 
     float nivelFade;
     public:
-    KinectContornosBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent, ofxOscReceiver *receiver);
+    KinectContornosBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent);
     void draw();
     void update( float dt );
 
