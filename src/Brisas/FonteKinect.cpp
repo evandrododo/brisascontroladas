@@ -154,11 +154,15 @@ void FonteKinect::drawControles() {
 void FonteKinect::drawMiniatura() {
     int widthWindow = WindowManager::getInstance().getGuiWindowWidth();
     int heightWindow = WindowManager::getInstance().getGuiWindowHeight();
+    // cout << "width x height: " << widthWindow << "x" << heightWindow << endl;
     int miniaturaWidth = 308;
     int miniaturaHeight = 231;
     int xMini = widthWindow - miniaturaWidth - 10; 
     int yMini = heightWindow - miniaturaHeight - 10;
+
     fboBrisa.draw(xMini, yMini ,miniaturaWidth,miniaturaHeight);
+    // cout << "xMini: " << xMini << " yMini: " << yMini << endl;
+    // cout << "miniaturaWidth: " << miniaturaWidth << " miniaturaHeight: " << miniaturaHeight << endl;
 }
 
 void FonteKinect::setBlur( int novoBlur ) {

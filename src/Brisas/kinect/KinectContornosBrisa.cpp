@@ -59,6 +59,6 @@ void KinectContornosBrisa::drawControles(int iBrisa) {
     // draw fboBrisa to screen
     fonteKinect->drawControles();
     fonteKinect->drawMiniatura();
-    desenharControlesShader();
 
+    Brisa::drawControles(iBrisa);
 }

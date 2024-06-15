@@ -26,6 +26,7 @@ public:
     void desligaKinect();
 
     void adicionaBrisa();
+    void windowResized(int w, int h);
 
     ofxImGui::Gui gui;
 

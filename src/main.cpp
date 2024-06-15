@@ -12,7 +12,7 @@ int main(){
 	int xDisplay, yDisplay, wDisplay, hDisplay;
 	
 	// Posição inicial e tamanho da tela de controle
-	xGUI = 1500;
+	xGUI = 0;
 	yGUI = 20;
 	wGUI = 1333;
 	hGUI = 950;

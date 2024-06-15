@@ -62,6 +62,11 @@ void GuiApp::draw()
     ofBackground(100, 100, 100);
 
     gui.begin();
+
+    // if the window is resized, update the size of the gui
+    ImVec2 currentWindowSize = ImGui::GetWindowSize();
+    cout << "currentWindowSize: " << currentWindowSize.x << " " << currentWindowSize.y << endl;
+
     // Janela para adicionar brisas
     ImGui::SetNextWindowSize(ofVec2f(550, 380), ImGuiCond_Appearing);
     adicionaBrisa();
@@ -257,4 +262,9 @@ void GuiApp::mousePressed(int x, int y, int iButton)
         cout << "\nx:" << x << " y:" << y << " btn:" << iButton;
         cout << " - Brisa Focada: " << iBrisaFocada;
     }
+}
+
+void GuiApp::windowResized(int w, int h)
+{
+    WindowManager::getInstance().setGuiWindowSize(w, h);
 }
