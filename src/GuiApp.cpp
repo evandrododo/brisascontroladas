@@ -65,7 +65,6 @@ void GuiApp::draw()
 
     // if the window is resized, update the size of the gui
     ImVec2 currentWindowSize = ImGui::GetWindowSize();
-    cout << "currentWindowSize: " << currentWindowSize.x << " " << currentWindowSize.y << endl;
 
     // Janela para adicionar brisas
     ImGui::SetNextWindowSize(ofVec2f(550, 380), ImGuiCond_Appearing);
@@ -73,6 +72,35 @@ void GuiApp::draw()
 
     ImGui::SetNextWindowSize(ofVec2f(250, 300), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowPos(ofVec2f(1060, 2), ImGuiCond_FirstUseEver);
+    UIControlesGerais();
+
+    // Me mostra essas brisa
+    for (int i = 0; i < brisasAtivas.size(); i++)
+    {
+        if (desenhaMiniaturas)
+        {
+            bool focada = (i == iBrisaFocada);
+            brisasAtivas[i]->desenhaMiniatura(i, focada);
+        }
+        if (i == iBrisaFocada)
+        {
+            brisasAtivas[i]->desenhaJanela(i);
+        }
+    }
+
+    for (int i = 0; i < timeline0.size(); i++)
+    {
+        bool focada = false;
+        timeline0[i]->desenhaMiniatura(i, focada);
+    }
+
+    ImGui::End();
+
+    gui.end();
+}
+
+void GuiApp::UIControlesGerais()
+{
     ImGui::Begin("Controles Gerais");
 
     ImGui::Text("%.1f FPS (%.3f ms/frame) ", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
@@ -121,31 +149,35 @@ void GuiApp::draw()
     ImGui::SameLine();
     ImGui::RadioButton("add", &iBlend, 2);
     ImGui::SameLine();
-    ImGui::RadioButton("screen", &iBlend, 3); // ImGui::SameLine();
+    ImGui::RadioButton("screen", &iBlend, 3); 
 
-    // Me mostra essas brisa
-    for (int i = 0; i < brisasAtivas.size(); i++)
-    {
-        if (desenhaMiniaturas)
-        {
-            bool focada = (i == iBrisaFocada);
-            brisasAtivas[i]->desenhaMiniatura(i, focada);
+    //Pula uma linha
+    ImGui::NewLine();
+
+    // REC main screen
+    if (isRecording) {
+        ImGui::Text("Recording... %d", framesRecorded);
+        if (ImGui::Button("[STOP]")) {
+            stopRecording();
         }
-        if (i == iBrisaFocada)
-        {
-            brisasAtivas[i]->desenhaJanela(i);
+    } else {
+        if (ImGui::Button("[REC]")) {
+            startRecording();
         }
     }
+}
 
-    for (int i = 0; i < timeline0.size(); i++)
-    {
-        bool focada = false;
-        timeline0[i]->desenhaMiniatura(i, focada);
-    }
+void GuiApp::setFrameCountRecorded(int frameCount) {
+    this->framesRecorded = frameCount;
+}
 
-    ImGui::End();
+void GuiApp::startRecording() {
+    isRecording = true;
+    framesRecorded = 0;
+}
 
-    gui.end();
+void GuiApp::stopRecording() {
+    isRecording = false;
 }
 
 void GuiApp::adicionaBrisa()

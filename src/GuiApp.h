@@ -27,6 +27,12 @@ public:
 
     void adicionaBrisa();
     void windowResized(int w, int h);
+    void UIControlesGerais();
+    bool isRecording = false;
+    void startRecording();
+    void stopRecording();
+    void setFrameCountRecorded(int frameCount);
+    int framesRecorded = 0;
 
     ofxImGui::Gui gui;
 
