@@ -14,6 +14,9 @@
 #include "kinect/SombraBrisa.h"
 #include "kinect/MatrizBrisa.h"
 
+#include "Brisas/FonteGlobalKinect.h"
+#include "kinect/Colunas.h"
+
 class GuiApp : public ofBaseApp
 {
 public:
@@ -41,10 +44,25 @@ public:
     vector<Brisa *> brisasAtivas;
     int iBrisaFocada;
     ofxKinect kinectGlobal;
-    int anguloKinect;
 
-    GLuint btnCriaVideo, btnCriaPoligono, btnCriaKinect, btnCriaImg, btnCriaFinder,
-        btnCriaGif, btnCriaMatriz, btnCriaSombras, btnCriaMandala, btnCriaBorda, btnCriaCamera, btnCriaKinectCam, btnCriaBody;
+    // Kinect
+    int anguloKinect;
+    int depthClippingFar, depthClippingNear;
+
+    GLuint btnCriaVideo,
+        btnCriaPoligono,
+        btnCriaKinect,
+        btnCriaImg,
+        btnCriaFinder,
+        btnCriaGif,
+        btnCriaMatriz,
+        btnCriaSombras,
+        btnCriaMandala,
+        btnCriaBorda,
+        btnCriaCamera,
+        btnCriaKinectCam,
+        btnCriaBody,
+        btnCriaColunas;
 
     vector<ImVec4> coresPaleta;
     ofBlendMode blendMode;

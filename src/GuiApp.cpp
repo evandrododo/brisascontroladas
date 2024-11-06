@@ -17,6 +17,7 @@ void GuiApp::setup()
     // change the collapsed header style
     style.Colors[ImGuiCol_Header] = ImVec4(0.3, 0.0, 0.5, 1.0);
 
+    btnCriaColunas = gui.loadTexture("../data/img/icon/colunas.png");
     btnCriaVideo = gui.loadTexture("../data/img/icon/video.png");
     btnCriaPoligono = gui.loadTexture("../data/img/icon/poligon.png");
     btnCriaKinect = gui.loadTexture("../data/img/icon/kinect.png");
@@ -40,6 +41,8 @@ void GuiApp::setup()
 
     iBlend = 2;
     anguloKinect = 0;
+    depthClippingFar = 2000;
+    depthClippingNear = 500;
 }
 
 void GuiApp::update()
@@ -97,6 +100,23 @@ void GuiApp::draw()
     ImGui::End();
 
     gui.end();
+
+    // Desenha as imagens do kinect
+    ofTexture depthTexture = FonteGlobalKinect::getInstance().getDepthTexture();
+    if (depthTexture.isAllocated() && FonteGlobalKinect::getInstance().getIsConnected())
+    {
+        int widthMiniatura = 160;
+        int heightMiniatura = 120;
+        // bottom right
+        int x = ofGetWidth() - widthMiniatura - 2;
+        int y = ofGetHeight() - heightMiniatura - 2;
+        // draw the depth texture
+        depthTexture.draw(x, y, widthMiniatura, heightMiniatura);
+
+        // draw the rgb texture
+        ofTexture rgbTexture = FonteGlobalKinect::getInstance().getRgbTexture();
+        rgbTexture.draw(x, y - 2 - heightMiniatura, widthMiniatura, heightMiniatura);
+    }
 }
 
 void GuiApp::UIControlesGerais()
@@ -106,21 +126,32 @@ void GuiApp::UIControlesGerais()
     ImGui::Text("%.1f FPS (%.3f ms/frame) ", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
     ImGui::Checkbox("Desenha miniaturas", &desenhaMiniaturas);
 
-    // Botões de liga e desliga do kinect
-    if (kinectGlobal.isConnected())
+    if (ImGui::CollapsingHeader("Kinect"))
     {
-        kinectGlobal.setCameraTiltAngle(anguloKinect);
-        ImGui::SliderInt("angulo", &anguloKinect, -30, 30);
-        if (ImGui::Button("Desliga Kinect"))
+        if (FonteGlobalKinect::getInstance().getIsConnected())
         {
-            desligaKinect();
+            // Atualiza o angulo do kinect
+            FonteGlobalKinect::getInstance().setAngle(anguloKinect);
+            // Atualiza o corte de profundidade
+            FonteGlobalKinect::getInstance().setDepthClipping(depthClippingNear, depthClippingFar);
         }
-    }
-    else
-    {
-        if (ImGui::Button("Liga Kinect"))
+        // Botões de liga e desliga do kinect
+        if (FonteGlobalKinect::getInstance().getIsConnected())
         {
-            ligaKinect();
+            ImGui::SliderInt("angulo", &anguloKinect, -30, 30);
+            ImGui::SliderInt("depthClippingNear", &depthClippingNear, 500, 4000);
+            ImGui::SliderInt("depthClippingFar", &depthClippingFar, 500, 4000);
+            if (ImGui::Button("Desliga Kinect Global"))
+            {
+                FonteGlobalKinect::getInstance().desligaKinect();
+            }
+        }
+        else
+        {
+            if (ImGui::Button("Liga Kinect Global"))
+            {
+                FonteGlobalKinect::getInstance().ligaKinect();
+            }
         }
     }
 
@@ -149,34 +180,42 @@ void GuiApp::UIControlesGerais()
     ImGui::SameLine();
     ImGui::RadioButton("add", &iBlend, 2);
     ImGui::SameLine();
-    ImGui::RadioButton("screen", &iBlend, 3); 
+    ImGui::RadioButton("screen", &iBlend, 3);
 
-    //Pula uma linha
+    // Pula uma linha
     ImGui::NewLine();
 
     // REC main screen
-    if (isRecording) {
+    if (isRecording)
+    {
         ImGui::Text("Recording... %d", framesRecorded);
-        if (ImGui::Button("[STOP]")) {
+        if (ImGui::Button("[STOP]"))
+        {
             stopRecording();
         }
-    } else {
-        if (ImGui::Button("[REC]")) {
+    }
+    else
+    {
+        if (ImGui::Button("[REC]"))
+        {
             startRecording();
         }
     }
 }
 
-void GuiApp::setFrameCountRecorded(int frameCount) {
+void GuiApp::setFrameCountRecorded(int frameCount)
+{
     this->framesRecorded = frameCount;
 }
 
-void GuiApp::startRecording() {
+void GuiApp::startRecording()
+{
     isRecording = true;
     framesRecorded = 0;
 }
 
-void GuiApp::stopRecording() {
+void GuiApp::stopRecording()
+{
     isRecording = false;
 }
 
@@ -186,6 +225,8 @@ void GuiApp::adicionaBrisa()
     ImGui::SetNextWindowSize(ofVec2f(570, 340), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowPos(ofVec2f(170, 2), ImGuiCond_FirstUseEver);
     ImGui::Begin("Adicione uma camada de brisa:");
+    bool criaColunas = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaColunas, ImVec2(120, 90));
+    ImGui::SameLine();
     bool criaKinect = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaKinect, ImVec2(120, 90));
     ImGui::SameLine();
     bool criaKinectCam = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaKinectCam, ImVec2(120, 90));
@@ -210,6 +251,11 @@ void GuiApp::adicionaBrisa()
     //    bool criaMandala = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaMandala, ImVec2(120, 90)); ImGui::SameLine();
     //    bool criaBorda = ImGui::ImageButton((ImTextureID)(uintptr_t)btnCriaBorda, ImVec2(120, 90));
 
+    if (criaColunas)
+    {
+        cout << "btn pressionado: criaColunas";
+        brisasAtivas.push_back(new Colunas());
+    }
     if (criaVideo)
     {
         cout << "btn pressionado: criaVideo";
@@ -265,22 +311,6 @@ void GuiApp::adicionaBrisa()
     // }
 
     ImGui::End();
-}
-
-void GuiApp::ligaKinect()
-{
-    if (!kinectGlobal.isConnected())
-    {
-        kinectGlobal.setRegistration(true);
-        kinectGlobal.init();
-        kinectGlobal.open();
-        kinectGlobal.setCameraTiltAngle(0);
-    }
-}
-
-void GuiApp::desligaKinect()
-{
-    kinectGlobal.close();
 }
 
 void GuiApp::mousePressed(int x, int y, int iButton)

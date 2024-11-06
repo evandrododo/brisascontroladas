@@ -29,6 +29,7 @@ void FonteKinect::ligaKinect() {
         kinect->setRegistration(true);
         kinect->init();
         kinect->open();
+
         kinect->setCameraTiltAngle(0);
     }
 }

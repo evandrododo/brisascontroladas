@@ -41,6 +41,11 @@ void ofApp::update()
 
     ofEnableBlendMode(gui->blendMode);
 
+    if (FonteGlobalKinect::getInstance().getIsConnected())
+    {
+        FonteGlobalKinect::getInstance().update();
+    }
+
     if (gui->isRecording)
     {
         saveFrame();
