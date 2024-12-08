@@ -1,23 +1,21 @@
 #include "../Brisa.h"
 
-class KinectContornosBrisa : public Brisa {
+class KinectContornosBrisa : public Brisa
+{
 
-    float nivelFade;
-    public:
-    KinectContornosBrisa(ofxKinect *kinectGlobal, vector<Brisa*> *brisasParent);
+public:
+    KinectContornosBrisa();
     void draw();
-    void update( float dt );
-
-    void desenhaMiniatura(int i);
+    void update(float dt);
 
     void drawControles(int iBrisa);
 
+    float nivelFade = 20;
+    bool clearFrames = true;
+    bool ligaContornos = true;
+    bool bFindHoles = false;
     bool mirrorHorizontal, mirrorVertical;
-    bool ligaContornos;
-    bool bFindHoles;
-    int minArea,maxArea,blobsConsiderados;
+    int minArea, maxArea, blobsConsiderados;
     ofxCvContourFinder contourFinder;
     ofxCvGrayscaleImage grayImage;
-
-    FonteKinect* fonteKinect;
 };

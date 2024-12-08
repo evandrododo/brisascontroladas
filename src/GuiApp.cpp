@@ -269,7 +269,7 @@ void GuiApp::adicionaBrisa()
     if (criaKinect)
     {
         cout << "btn pressionado: criaKinect";
-        brisasAtivas.push_back(new KinectContornosBrisa(&kinectGlobal, &brisasAtivas));
+        brisasAtivas.push_back(new KinectContornosBrisa());
     }
     if (criaImg)
     {
